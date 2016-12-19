@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_device"
+        style="@style/ListView_Tv"
+        android:drawableLeft="@drawable/ic_android_black_24dp" />
+
+
+    <TextView
+        android:id="@+id/tv_address"
+        style="@style/ListView_Tv"
+        android:drawableLeft="@drawable/ic_place_black_24dp" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        style="@style/ListView_Tv"
+        android:drawableLeft="@drawable/ic_content_paste_black_24dp" />
+
+    <TextView
+        android:id="@+id/tv_created_at"
+        style="@style/ListView_Tv"
+        android:drawableLeft="@drawable/ic_hdr_strong_black_24dp" />
+
+    <TextView
+        android:id="@+id/tv_updated_at"
+        style="@style/ListView_Tv"
+        android:drawableLeft="@drawable/ic_hdr_weak_black_24dp" />
+</LinearLayout>
