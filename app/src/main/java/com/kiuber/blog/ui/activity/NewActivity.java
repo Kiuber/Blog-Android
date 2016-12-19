@@ -1,4 +1,4 @@
-package com.kiuber.blog.activity;
+package com.kiuber.blog.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.kiuber.blog.activity;
+package com.kiuber.blog.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,24 +31,27 @@ import java.util.List;
 /**
  * Created by Kiuber on 2016/12/19.
  */
-public class FileActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+public class FileFragment extends Fragment implements AdapterView.OnItemClickListener {
+
+    private View view;
     private TextView mTvPath;
     private ListView mLvFile;
     private List<FileBean> beanList;
     private FileAdapter fileAdapter;
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_file, null);
         initView();
         initData();
+        return view;
     }
 
     private void initView() {
-        mTvPath = (TextView) findViewById(R.id.tv_path);
-        mLvFile = (ListView) findViewById(R.id.lv_file);
+        mTvPath = (TextView) view.findViewById(R.id.tv_path);
+        mLvFile = (ListView) view.findViewById(R.id.lv_file);
     }
 
     private void initData() {
@@ -61,7 +64,7 @@ public class FileActivity extends AppCompatActivity implements AdapterView.OnIte
                 mLvFile.setOnItemClickListener(this);
             }
         } else {
-            Toast.makeText(this, "SDCard is not mounted!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "SDCard is not mounted!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -108,7 +111,7 @@ public class FileActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 return folderBeanList;
             } else {
-                Toast.makeText(this, "文件夹不可读", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "文件夹不可读", Toast.LENGTH_SHORT).show();
                 return null;
             }
         } else {
@@ -147,7 +150,7 @@ public class FileActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 return fileName;
             } else {
-                Toast.makeText(this, "文件夹不可读", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "文件夹不可读", Toast.LENGTH_SHORT).show();
                 return null;
             }
         } else {
@@ -211,17 +214,6 @@ public class FileActivity extends AppCompatActivity implements AdapterView.OnIte
         fileAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (mTvPath.getText().toString().equals("/")) {
-            finish();
-            return true;
-        } else {
-            backParent();
-            return false;
-        }
-    }
-
     class FileAdapter extends BaseAdapter {
         @Override
         public int getCount() {
@@ -244,7 +236,7 @@ public class FileActivity extends AppCompatActivity implements AdapterView.OnIte
             ViewHolder viewHolder = null;
             if (viewHolder == null) {
                 viewHolder = new ViewHolder();
-                convertView = View.inflate(FileActivity.this, R.layout.item_lv_file, null);
+                convertView = View.inflate(getContext(), R.layout.item_lv_file, null);
                 viewHolder.initView(convertView);
                 convertView.setTag(viewHolder);
             } else {
