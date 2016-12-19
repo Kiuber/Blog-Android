@@ -25,7 +25,7 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by Kiuber on 2016/12/2.
  */
-public class AddContent extends AppCompatActivity implements View.OnClickListener {
+public class NewActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTvDevice;
     private TextView mTvLocation;
@@ -44,7 +44,7 @@ public class AddContent extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_new);
         initView();
         amap();
     }
@@ -59,7 +59,7 @@ public class AddContent extends AppCompatActivity implements View.OnClickListene
                     if (arg0.getErrorCode() == 0) {
                         bundleData(arg0);
                     } else {
-                        Toast.makeText(AddContent.this, arg0.getErrorInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NewActivity.this, arg0.getErrorInfo(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -128,9 +128,9 @@ public class AddContent extends AppCompatActivity implements View.OnClickListene
             @Override
             public void done(String s, BmobException e) {
                 if (e == null) {
-                    Toast.makeText(AddContent.this, "发布成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(AddContent.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
