@@ -3,7 +3,9 @@ package com.kiuber.blog.activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -65,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    private boolean hasSDCardMounted() {
+        String state = Environment.getExternalStorageState();
+        if (state != null && state == Environment.MEDIA_MOUNTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     private void initView() {
         mLvAll = (ListView) findViewById(R.id.lv_all);
