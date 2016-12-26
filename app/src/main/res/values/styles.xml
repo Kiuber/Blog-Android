@@ -17,4 +17,8 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
 
+    <declare-styleable name="MyView">
+        <attr name="default_size" format="dimension" />
+    </declare-styleable>
+
 </resources>
