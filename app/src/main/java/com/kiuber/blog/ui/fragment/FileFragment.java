@@ -1,5 +1,6 @@
 package com.kiuber.blog.ui.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +34,7 @@ import java.util.List;
  * Created by Kiuber on 2016/12/19.
  */
 
-public class FileFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class FileFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private View view;
     private TextView mTvPath;
@@ -52,6 +54,7 @@ public class FileFragment extends Fragment implements AdapterView.OnItemClickLis
     private void initView() {
         mTvPath = (TextView) view.findViewById(R.id.tv_path);
         mLvFile = (ListView) view.findViewById(R.id.lv_file);
+        mLvFile.setOnItemLongClickListener(this);
     }
 
     private void initData() {
@@ -212,6 +215,37 @@ public class FileFragment extends Fragment implements AdapterView.OnItemClickLis
         }
         beanList = fileBeanList1;
         fileAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        final FileBean bean = beanList.get(position);
+        if (bean.getFile_name().equals("../")) {
+        } else if (bean.getFile_name().contains("/")) {
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage("确定删除" + bean.getFile_name() + "？");
+            builder.setPositiveButton("删除", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String path = mTvPath.getText().toString();
+                    File file = new File(path + bean.getFile_name());
+                    if (file.exists()) {
+
+                        if (file.getAbsoluteFile().delete()) {
+                            Toast.makeText(getContext(), "删除成功！", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("TAG", "onClick: " + path + bean.getFile_name() + "-->" + file.getAbsoluteFile());
+                            Toast.makeText(getContext(), "删除失败！", Toast.LENGTH_SHORT).show();
+                        }
+                        System.gc();
+                    }
+                }
+            });
+            builder.setNegativeButton("取消", null);
+            builder.show();
+        }
+        return true;
     }
 
     class FileAdapter extends BaseAdapter {
