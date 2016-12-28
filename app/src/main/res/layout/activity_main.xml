@@ -41,6 +41,18 @@
             android:gravity="center"
             android:padding="@dimen/little_space"
             android:text="文件" />
+
+        <RadioButton
+            android:id="@+id/rb_tool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="@dimen/little_space"
+            android:drawableTop="@drawable/ic_build_black_24dp"
+            android:gravity="center"
+            android:padding="@dimen/little_space"
+            android:text="工具" />
     </RadioGroup>
 
 </LinearLayout>

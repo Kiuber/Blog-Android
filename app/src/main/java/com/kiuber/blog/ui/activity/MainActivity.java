@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import com.kiuber.blog.R;
 import com.kiuber.blog.ui.fragment.FileFragment;
 import com.kiuber.blog.ui.fragment.TintFragment;
+import com.kiuber.blog.ui.fragment.ToolFragment;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     private RadioButton mRbTint;
     private RadioButton mRbFile;
     private ArrayList<Fragment> fragmentArrayList;
+    private RadioButton mRbTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,12 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         mRgTabs = (RadioGroup) findViewById(R.id.rg_tabs);
         mRbTint = (RadioButton) findViewById(R.id.rb_tint);
         mRbFile = (RadioButton) findViewById(R.id.rb_file);
+        mRbTool = (RadioButton) findViewById(R.id.rb_tool);
 
         fragmentArrayList = new ArrayList<>();
         fragmentArrayList.add(new TintFragment());
         fragmentArrayList.add(new FileFragment());
+        fragmentArrayList.add(new ToolFragment());
         MyFragemntAdapter myFragemntAdapter = new MyFragemntAdapter(getSupportFragmentManager());
         mRgTabs.setOnCheckedChangeListener(this);
         mRbTint.setChecked(true);
@@ -60,6 +64,9 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
                 break;
             case R.id.rb_file:
                 mVpContent.setCurrentItem(1);
+                break;
+            case R.id.rb_tool:
+                mVpContent.setCurrentItem(2);
                 break;
         }
     }
@@ -83,6 +90,9 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
                     break;
                 case 1:
                     mRbFile.setChecked(true);
+                    break;
+                case 2:
+                    mRbTool.setChecked(true);
                     break;
             }
         }
