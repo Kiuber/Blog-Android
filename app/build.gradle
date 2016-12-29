@@ -29,4 +29,5 @@ dependencies {
     //3.5.0：请务必查看下面注释[1]
     compile 'cn.bmob.android:bmob-sdk:3.5.3'
     compile files('libs/AMap_Location_V3.1.0_20161027.jar')
+    compile 'com.bigkoo:pickerview:2.1.1'
 }
